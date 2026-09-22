@@ -1,0 +1,6 @@
+interface:
+  display_name: "手绘图文、漫画、社媒卡与信息图"
+  short_description: "支持单张图文、分镜漫画、19种社媒卡和31种信息图，按内容选择画风与排版"
+  default_prompt: "使用 $story-to-handdraw-comic，将内容制作成手绘图文、漫画、社媒卡或信息图；按内容选择画风和排版，社媒卡支持 SC 编号，信息图支持 IG 编号并保留事实与数据，生成适合发布的图片。"
+policy:
+  allow_implicit_invocation: true
