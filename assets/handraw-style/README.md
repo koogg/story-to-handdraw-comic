@@ -2,11 +2,12 @@
 
 当前收录 **001–277 种手绘风格**和 **30 种经典单色主题色**，与本地参考图一同打包。主 Skill 通过解析器读取资源，无需联网或重新安装上游仓库。
 
-- [排版与分镜画廊](skills/handdraw-style-prompter/gallery/layouts.html)：19 种社媒卡、31 种信息图、68 种分镜，预览与提示词均可离线查看。
+- [排版与分镜画廊](skills/handdraw-style-prompter/gallery/layouts.html)：19 种社媒卡、32 种信息图、68 种分镜，预览与提示词均可离线查看。
 - [色彩画廊](skills/handdraw-style-prompter/gallery/colors.html)：30 种经典单色主题色及可复制提示词。
 - [编号画廊](skills/handdraw-style-prompter/gallery/index.html)：查看和选择画风；已知编号时直接解析。
 - [风格目录](styles_200_reorganized.md)：名称和视觉特征的权威源。
 - [提示词 Skill](skills/handdraw-style-prompter/SKILL.md)：独立使用时输出双语提示词，支持纯图和图文模式；明确要求时生图。
+- [海报 Skill](skills/poster-prompt-generator/SKILL.md)：用八个结构化字段生成图文一体海报提示词，复用本地画风、主题色与模型能力矩阵。
 - [新增画风](.agents/skills/style-library-importer/SKILL.md)：本地参考图与文字描述入库，先预检再追加编号。
 
 生图模型未暴露时使用 unknown 策略；名称和特征不足以激活画风时附加编号参考图。完整规则由上述 Skill 与解析器维护。

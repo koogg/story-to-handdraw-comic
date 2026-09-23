@@ -10,6 +10,7 @@ Install this complete package at path `.`; nested skills depend on its `images/`
 Read only the applicable entry:
 
 - Numbered theme prompts or requested images: [handdraw-style-prompter](skills/handdraw-style-prompter/SKILL.md).
+- Poster design or structured poster prompts: [poster-prompt-generator](skills/poster-prompt-generator/SKILL.md), which reuses the same style, color, and model-capability resources.
 - Article illustration positions/concepts/prompts: [article-illustration-planner](skills/article-illustration-planner/SKILL.md), which uses the style resolver.
 - Explicit reusable-style additions: [style-library-importer](.agents/skills/style-library-importer/SKILL.md).
 

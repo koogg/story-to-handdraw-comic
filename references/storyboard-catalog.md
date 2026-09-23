@@ -1,6 +1,6 @@
 # Storyboard mechanism catalog
 
-来源：[yang0/handraw-style](https://github.com/yang0/handraw-style/tree/12e8b8ffef26c1bc900601e65995d6fbc298b863)，版本 `12e8b8ffef26`。以该版本的 layouts.json 和中英提示词文件为准；所有预览已保存本地。
+来源：[yang0/handraw-style](https://github.com/yang0/handraw-style/tree/69b159c0a9b693f7b90dab856eef02466938b27d)，版本 `69b159c0a9b`。以该版本的 layouts.json 和中英提示词文件为准；所有预览已保存本地。
 
 共 68 种分镜，编号 SB-001–SB-068。原来的 01–68 仍可作为同号简写，统一解析为 SB 编号；69–80 已移除，不再推荐。预览只提供版式结构，不覆盖所选画风、人物和创作内容。
 

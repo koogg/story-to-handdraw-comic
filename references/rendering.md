@@ -1,15 +1,16 @@
 # Rendering and acceptance
 
-Read when generating, repairing, or delivering prompts for comic pages, single text-and-image illustrations, social cards, or infographics. Each page or standalone image has its own attempt budget. Use the available native image-generation tool and its current attachment rules. Do not call independent image APIs or inspect credential/configuration files.
+Read when generating, repairing, or delivering prompts for posters, comic pages, single text-and-image illustrations, social cards, or infographics. Each page or standalone image has its own attempt budget. Use the available native image-generation tool and its current attachment rules. Do not call independent image APIs or inspect credential/configuration files.
 
 ## Prompt-model delivery
 
-If the user selects **提示词模型** (also accept 提示词模式 / 仅提示词) or explicitly asks for prompts, do not call an image-generation tool. Finish the same adaptation, style resolution, layout/storyboard design, and person/reference mapping that image generation would use, then save all final prompts in one Markdown file in the user's workspace. Use `graphic-prompts.md`, `social-card-prompts.md`, `infographic-prompts.md`, or `comic-page-prompts.md` as appropriate, choosing a new name rather than overwriting an existing file.
+If the user selects **提示词模型** (also accept 提示词模式 / 仅提示词) or explicitly asks for prompts, do not call an image-generation tool. Finish the same adaptation, style resolution, layout/storyboard design, and person/reference mapping that image generation would use, then save all final prompts in one Markdown file in the user's workspace. Use `poster-prompts.md`, `graphic-prompts.md`, `social-card-prompts.md`, `infographic-prompts.md`, or `comic-page-prompts.md` as appropriate, choosing a new name rather than overwriting an existing file.
 
 The file must be directly usable outside this conversation: no `{placeholders}`, omitted decisions, chat-history dependencies, or instructions to “use the plan above.” Start with a short usage note, then give one separately copyable fenced prompt per requested image/page. Every prompt must repeat the shared context it needs, including asset type, ratio and output count; resolved style number/name/positive traits; complete adapted display text with LOCKED spans, speaker, and placement; tone and core meaning; visual concept or full layout/page/panel plan and reading order; continuity/person mapping; explicit must-keeps and content boundaries; typography/layout constraints; and each required reference image's absolute path and role. State beside every reference that the user must upload it to the external image tool because a path alone is not an attachment. End with any exact typesetting copy or known limitations needed for correct use. Return the absolute Markdown path; a chat-only prompt is not completion of this mode.
 
 ## Before generation
 
+- Poster: use the eight fields and mandatory graphic-text suffix from the poster generator Skill. Resolve style/reference policy before generation; inspect title hierarchy, copy legibility, visual metaphor, and integrated typography.
 - Social-card / infographic: generate one complete card or information graphic per call using [social-infographic.md](social-infographic.md). Multiple information zones are allowed; preserve the selected SC-/IG- structure. Inspect factual fidelity, labels, values, units, and visual relationships; creative freedom does not authorize factual changes. Use that guide's file names for images and prompt-only fallbacks.
 - Check that required style/person images are readable and can actually be attached together within input limits. A path mentioned in prose is not an attachment. Never silently drop a required reference.
 - Single-graphic: generate the one complete undivided composition in one call, with one sentence/paragraph integrated into the image. Do not create panels or additional cover/variation images by default.
@@ -32,4 +33,4 @@ Show the prompt in the response when practical for immediate copying, but the sa
 
 ## Save and deliver
 
-Save workspace outputs under stable names such as `graphic-01.png` or `comic-page-01.png`, choosing a new name when it already exists unless replacement was requested. Return accepted images in order with absolute paths. Report actual style/person reference use and remaining limitations honestly. Keep uninspected, failed, and awaiting-typesetting output clearly labeled.
+Save workspace outputs under stable names such as `poster-01.png`, `graphic-01.png`, or `comic-page-01.png`, choosing a new name when it already exists unless replacement was requested. Return accepted images in order with absolute paths. Report actual style/person reference use and remaining limitations honestly. Keep uninspected, failed, and awaiting-typesetting output clearly labeled.

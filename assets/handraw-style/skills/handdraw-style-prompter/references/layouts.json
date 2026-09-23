@@ -796,6 +796,25 @@
     "name_en": "Encyclopedic Specimen Information Card"
   },
   {
+    "id": "IG-032",
+    "category": "infographic",
+    "name": "手绘编辑式知识信息图",
+    "image": "../../../images/layouts/infographics/IG-032.webp",
+    "prompt_file": "layouts/IG-032.md",
+    "keywords": [
+      "手绘编辑式",
+      "大标题",
+      "核心主视觉",
+      "编号模块",
+      "思维泡泡",
+      "手写注释",
+      "清单总结",
+      "轻漫画叙事",
+      "知识信息图"
+    ],
+    "name_en": "Hand-Drawn Editorial Knowledge Infographic"
+  },
+  {
     "id": "SB-001",
     "category": "comic-storyboard",
     "name": "规则网格",
