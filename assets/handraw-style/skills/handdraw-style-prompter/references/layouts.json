@@ -1657,17 +1657,17 @@
   {
     "id": "SB-057",
     "category": "comic-storyboard",
-    "name": "海报式漫画",
+    "name": "主视觉叙事漫画",
     "image": "../../../images/layouts/comic-storyboards/SB-057.webp",
     "prompt_file": "layouts/SB-057.md",
     "keywords": [
       "漫画分镜",
-      "海报式漫画",
+      "主视觉叙事漫画",
       "主视觉封面",
       "画中嵌入",
       "故事附着"
     ],
-    "name_en": "Poster-Style Narrative"
+    "name_en": "Hero-Visual Narrative"
   },
   {
     "id": "SB-058",

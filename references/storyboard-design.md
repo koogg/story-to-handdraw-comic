@@ -46,7 +46,7 @@ For “one monk carries, two share, three avoid work, then no water,” a clarit
 - **Suspense, investigation, or memory:** 10 spiral, 12 fragments, 34 dual tracks, 35 cross-cutting, 36 flashback inset, 38 surveillance wall, 40 evidence collage, or 47 central investigator.
 - **Educational, process, or data story:** 22 hand-action chain, 42 infographic comic, 43 map route, 44 timeline, 45 clock, or 46 central object.
 - **Emotion, reflection, or poetic ending:** 23 far-to-near, 24 near-to-far, 29 still repetition, 31 aftermath white space, 37 imagination inset, 52 floating panels, 53 borderless, 54 white-field, or 62 mirror reflection.
-- **Social poster or carousel cover:** 41 magazine editorial, 57 poster comic, 58 cover-story page, 65 typography-led, or 67 color-block-led.
+- **Comic cover or opening page:** 41 magazine editorial, 57 hero-visual narrative, 58 cover-story page, 65 typography-led, or 67 color-block-led.
 - **Worldbuilding, historical, fantasy, or ceremonial:** 18 widescreen strips, 48 circular cycle, 56 simulated spread, or 68 geometric divisions.
 
 ## Beat rules

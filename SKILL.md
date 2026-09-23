@@ -1,16 +1,16 @@
 ---
 name: story-to-handdraw-comic
-description: Create hand-drawn posters, comics, single text-and-image illustrations, social cards (社媒卡, SC layouts), and infographics (信息图, IG layouts). Creatively adapt stories and opinions; preserve factual information in infographics. Support person references and planning-only requests.
+description: Create hand-drawn single text-and-image illustrations, social cards (社媒卡, SC layouts), infographics (信息图, IG layouts), and storyboard comics. Creatively adapt stories and opinions; preserve factual information in infographics. Support person references and planning-only requests.
 ---
 
 # 手绘图文创作
 
-将文本制作成海报、单张图文、社媒卡、信息图或分镜漫画。资源路径相对于本技能目录；生成结果保存在用户工作区，命令从本技能目录运行。
+将文本制作成单张图文、社媒卡、信息图或分镜漫画。资源路径相对于本技能目录；生成结果保存在用户工作区，命令从本技能目录运行。
 
 ## 共同原则
 
 - 尊重所选画风的线条、笔触、材质、色彩与造型语言。STYLE 参考只提供视觉语言，不照搬主体、文字、场景或构图；人物参考另行处理。
-- 海报、单张图文、社媒卡、漫画默认**创作性改编**：保留核心含义、矛盾或情绪，主动探索有趣的表达，允许重构文案、对白、人物、场景、事件、隐喻和结尾。原文细节不自动锁定；平淡改写不算完成创作。
+- 单张图文、社媒卡、漫画默认**创作性改编**：保留核心含义、矛盾或情绪，主动探索有趣的表达，允许重构文案、对白、人物、场景、事件、隐喻和结尾。原文细节不自动锁定；平淡改写不算完成创作。
 - 信息图默认忠实提炼事实、数值、单位、时间和关系；创意用于措辞、解释角度、视觉类比与构图，不能编造事实或用类比冒充事实。
 - 指定排版或分镜时保留关键结构、层级与阅读关系，主体设计、姿态、局部位置、留白和文字表现仍可创新。逐字保留也不取消画面创意。
 - 用户明确的形式、数量、必留内容和锁定文字优先。沿用已接受的内容，局部修改只调整相关部分。不擅自删必需内容、增页或把锁定文字缩到不可读；确有冲突才询问取舍。
@@ -23,7 +23,7 @@ description: Create hand-drawn posters, comics, single text-and-image illustrati
 |---|---|
 | 画风 / 风格 | 本地有效编号或自动选择。委托自动选择时，先提出至少三套跨风格候选组合；完全未指定且未委托时，也推荐至少三套候选供选择。 |
 | 主题色 / 配色 | 可选 C-01–C-30 或颜色名称；使用颜色索引中的精确中英文提示词，不把色卡图片作为参考图。 |
-| 类型 / 输出形式 | 海报、单张图文、社媒卡、信息图、分镜漫画，或自动选择；省略时按内容判断。兼容 poster / single-graphic / social-card / infographic / comic，及类型值“海报 / 社媒 / 信息 / 分镜”。 |
+| 类型 / 输出形式 | 单张图文、社媒卡、信息图、分镜漫画，或自动选择；省略时按内容判断。兼容 single-graphic / social-card / infographic / comic，及类型值“社媒 / 信息 / 分镜”。 |
 | 输出模型 | 默认按任务意图处理；选择“提示词模型”（兼容“提示词模式”“仅提示词”），或明确要求“提示词”时，不调用生图工具，把所有成品级提示词写入一份 Markdown 文件。 |
 | 文本 / 内容 | 原文或创作主题。中文来源默认用简短简体中文；按所选类型改编或提炼。 |
 | 语调 | 按用户指定，否则读完内容再推断主语调，可附次要情绪；与画风独立。 |
@@ -34,7 +34,7 @@ description: Create hand-drawn posters, comics, single text-and-image illustrati
 | 必须出现的文字 / 必须保留 | 前者锁定展示文字及指定的说话人、位置；后者锁定事实或视觉元素，不要求将清单印进图中。 |
 | 人物参考 | 可选照片与角色对应关系，默认兼顾辨识度和画风。 |
 | 受众 / 发布平台或用途 | 分别判断读者与用途，仅在合适或要求时使用儿童口吻；未指定平台不自动生成发布套餐。 |
-| 数量 / 页数 / 比例 | 海报、单张图文、社媒卡、信息图默认一张；漫画用完整表达所需的最少页数，多页连续推进。通常竖版，明确数量与比例优先。 |
+| 数量 / 页数 / 比例 | 单张图文、社媒卡、信息图默认一张；漫画用完整表达所需的最少页数，多页连续推进。通常竖版，明确数量与比例优先。 |
 | 节奏与信息密度 / 内容边界 | 在可读性与核心含义范围内充分创作，仅用户明确边界收紧自由；事实性内容不得因此失真。 |
 
 “例如 / 等”列出的是备选项，不需全部出现。只有明确要求出图时生成；方案请求不生图。“提示词模型”是交付模式，不是画风或图像模型：必须生成完整提示词文件，不要只返回方案或聊天中的提示词片段。
@@ -50,13 +50,12 @@ description: Create hand-drawn posters, comics, single text-and-image illustrati
 
 | 类型 | 选择条件与边界 |
 |---|---|
-| 海报 | 明确要求海报、活动主视觉、节日宣发或结构化海报提示词。使用主题、业务场景、受众、密度、情感、主题色、editorial 风格和画风八个字段；默认图文一体，不套用 SC/IG 排版。 |
 | 单张图文 | 独立观点、感悟、金句或表达一个想法的短段落，默认一句或一段文案加一幅不分区的完整画面。明确“一张图文”也选此项；不加载分镜目录，不拆成隐藏的连续小场景。 |
 | 社媒卡 | 明确要求社媒卡、指定 SC 编号，或需要结构化短文案和视觉层级。可有双区对照或标注；仅提到社交平台不强制改成此类型。 |
 | 信息图 | 知识整理、对比、流程、时间轴、分类、数据关系，或明确指定 IG 编号。保持信息关系，不强编故事。 |
 | 分镜漫画 | 效果依赖连续动作、对白、揭晓的故事或段子，或明确要求漫画。句子长短不决定是否分镜。 |
 
-“一张图片”只限制数量；“不分镜”不取消已选海报、社媒卡、信息图的版面或信息分区。“不分区”才要求完整构图。示例字段“分镜：自动选择”本身不把独立感悟变成漫画；明确格数或分镜机制则优先。
+“一张图片”只限制数量；“不分镜”不取消已选社媒卡、信息图的版面或信息分区。“不分区”才要求完整构图。示例字段“分镜：自动选择”本身不把独立感悟变成漫画；明确格数或分镜机制则优先。
 
 ## 工作流程
 
@@ -65,13 +64,12 @@ description: Create hand-drawn posters, comics, single text-and-image illustrati
 
    | 类型 | 要读取的指南 |
    |---|---|
-   | 海报 | [poster-prompt-generator](assets/handraw-style/skills/poster-prompt-generator/SKILL.md)：按八个纯净字段组织需求，复用本地画风、主题色和模型能力矩阵，默认图文一体。 |
    | 单张图文 | [single-graphic.md](references/single-graphic.md)：文案、视觉构思和完整提示词。 |
    | 社媒卡 / 信息图 | [social-infographic.md](references/social-infographic.md)：按需读取其排版目录，完成文案、布局、提示词与检查；跳过漫画和单张图文专用规则。 |
    | 分镜漫画 | [editorial-writing.md](references/editorial-writing.md) 完成改编，再读 [storyboard-design.md](references/storyboard-design.md) 与 [分镜目录](references/storyboard-catalog.md)的相关条目。选一个主机制，至多一个辅助机制；每个节拍明确动作、状态、场景、景别与文案，保持因果和物理动作合理。用 [page-prompt.md](references/page-prompt.md) 组装页面提示词。 |
 
 3. **人物与连续性。** 有照片时读 [person-reference.md](references/person-reference.md)，查看实际照片并建立人物对应，区分可见特征与创作设定。漫画记录重复出现的人物外观、道具、配色和空间锚点；单图只描述本图所需细节。
-4. **展示并检查方案。** 简要展示 **画风 → 类型 → 文本 → 画面设计**，末项按类型命名为海报设计、画面构思、排版或分镜，同时说明语调、数量、比例及适用的人物映射。检查核心含义、具体创意、所选结构、明确约束、文字可读性与图文配合；信息图另核事实，漫画另核叙事顺序、连续性与必需场面的实际呈现。
+4. **展示并检查方案。** 简要展示 **画风 → 类型 → 文本 → 画面设计**，末项按类型命名为画面构思、排版或分镜，同时说明语调、数量、比例及适用的人物映射。检查核心含义、具体创意、所选结构、明确约束、文字可读性与图文配合；信息图另核事实，漫画另核叙事顺序、连续性与必需场面的实际呈现。
 5. **生成与交付。** 选择“提示词模型”或明确要求提示词时，按 [rendering.md](references/rendering.md) 直接写入一份完整、可独立使用的 Markdown 文件，绝不调用生图工具。否则，已授权生图便继续且不另设确认步骤，并按同一指南执行附件检查、逐图验收、有限重试和工具不可用回退。只要方案且未要求提示词文件时，返回对应文案、设计与提示词即可。
 
 ## 按需资源
