@@ -1,27 +1,53 @@
 # Storyboard selection
 
-This reference applies only after selecting the comic form. For standalone opinions/reflections or explicit no-storyboard output, skip this file and the catalog entirely; use [single-graphic.md](single-graphic.md).
+This reference applies only after selecting the comic form. For standalone opinions/reflections or explicit no-storyboard output, skip this file and the catalog entirely; use the already-selected form's guide. Use [single-graphic.md](single-graphic.md) only for an undivided illustration; social cards and infographics use [social-infographic.md](social-infographic.md).
 
 Choose layout from the reader experience the story needs. The upstream set of 68 mechanisms (SB-001–SB-068) is indexed in [storyboard-catalog.md](storyboard-catalog.md), with local previews linked for each entry. The short numbers below are aliases for the same SB numbers (02 = SB-002); removed numbers 69–80 are invalid and must not be silently remapped. The catalog is a working vocabulary, not a menu that collapses every short story into a regular grid.
 
-This is the **分镜** stage, after **画风 → 语调 → 文本**. A visual style number never selects a storyboard number. Respect a user-specified mechanism; otherwise choose from the adapted script, tone, pacing, and requested **分镜表现力**. The default is **富有变化**. For slow pacing use reaction space and pauses; for fast reversal withhold the revealing detail until the intended beat; for dense jokes keep the causal thread readable; for a quiet ending reduce closing text. Honor the page count and canvas ratio, and stage required objects/outcomes explicitly. Continuous multi-page output must carry the story forward, not repeat one page as variations.
+This is the **分镜** stage, after **画风 → 语调 → 文本**. A visual style number never selects a storyboard number. Respect a user-specified mechanism; otherwise choose from the adapted script, tone, pacing, and requested **分镜表现力**. The default is **稳妥清晰、受控变化**: continuity comes first, while shot distance, panel scale, pauses, and focal emphasis may vary when they do not redesign the cast or space. For slow pacing use reaction space and pauses; for fast reversal withhold the revealing detail until the intended beat; for dense jokes keep the causal thread readable; for a quiet ending reduce closing text. Honor the page count and canvas ratio, and stage required objects/outcomes explicitly. Continuous multi-page output must carry the story forward, not repeat one page as variations.
+
+For a multi-page comic, automatic selection is **page-specific**, not one mechanism chosen once for the whole story. Continuity keeps characters, props, palette, geography, and state stable; it does not require repeated panel geometry. A page whose narrative state changes from preparation to entrance, confrontation, eruption, silence, aftermath, or reflection should normally change its spatial mechanism as well.
+
+Comic expressiveness must not alter recurring identities or physical state. Keep character face and body design, clothing, props, palette roles, left/right geography, entrances, damage, carried objects, and time-dependent changes consistent until the script changes them. Use richer geometry only when its timing or hierarchy benefit outweighs the continuity risk; bold experiments require an explicit user request or a clear story need.
 
 ## Expressiveness levels
 
-- **稳妥清晰:** regular navigation and restrained hierarchy for dense copy, instructions, strict teaching material, or an explicit user preference. Even here, vary shot distance and reserve a clear focal panel.
-- **富有变化 (default):** one immediately legible reading path plus a strong page idea—unequal panel scale, recurring background/object, progressive zoom, environmental route, deliberate interruption, or expanded ending. The geometry should reinforce the story, not decorate it.
+- **稳妥清晰 (default):** regular navigation and restrained hierarchy, with controlled changes in shot distance and one clear focal panel. Preserve recurring character, clothing, prop, and scene anchors.
+- **富有变化:** one immediately legible reading path plus a strong page idea—unequal panel scale, recurring background/object, progressive zoom, environmental route, deliberate interruption, or expanded ending. The geometry should reinforce the story without weakening continuity.
 - **大胆实验:** unconventional navigation, fragmentation, collage, floating panels, spiral/radial structures, or strong surface language. Use when requested or when the content clearly benefits and remains decipherable for the audience.
 
-Short or simple text often benefits most from expressive composition because it leaves room for scale, silence, movement, and visual callbacks. Do not add unnecessary story beats to make the page look complex. Complexity belongs in visual organization, not plot inflation.
+Short or simple text may use scale, silence, movement, and visual callbacks without increasing continuity risk. Do not add unnecessary story beats or experimental navigation merely to make the page look expressive; for comics, clarity and stable recurring anchors outrank visual novelty.
 
 ## Selection sequence
 
 1. Extract a **visual thesis** in one sentence: what change or contradiction should the reader understand from the page shape before reading every word? Examples: “more people occupy more space while the water disappears,” or “the empty jar becomes larger as excuses accumulate.”
 2. Identify usable visual carriers: character count, recurring object, route, height, distance, scale change, repeated setting, opposing sides, time, silence, or final reveal.
 3. If the mechanism is already specified or accepted, use it. Otherwise use the routing below and read the relevant catalog entries. When the fit is uncertain, compare two or three structurally different candidates (clear, expressive, or bold); do not scan all 68 mechanisms for every page.
-4. Select according to the requested expressiveness level. Default to an expressive structure when it stays legible. Do not show rejected candidates unless the user asks for alternatives.
+4. Select according to the requested expressiveness level. Default to a clear structure with controlled shot and scale variation; increase structural experimentation only when requested or when the story benefit clearly exceeds the continuity risk. Do not show rejected candidates unless the user asks for alternatives.
 5. Choose one **primary mechanism** that controls navigation and panel proportions. Optionally choose one compatible **accent mechanism** for a single key moment.
 6. Run the layout-value test: identify what the geometry contributes to timing, hierarchy, or meaning. For varied/experimental output, revise a choice that adds only decoration. A deliberately regular layout remains valid for 稳妥清晰 or an explicit user request. Reject visual cleverness when it weakens reading order, dialogue size, physical continuity, or phone-screen clarity.
+
+## Automatic selection for a multi-page story
+
+Before assigning any SB number, make a compact page-state map for the complete series. For every page record:
+
+1. **Narrative job:** setup, travel/entrance, confrontation, escalation, reveal, interruption, reaction, aftermath, reflection, or another concrete job.
+2. **Dominant visual carrier:** time, distance, opposing faces, repeated background, central object, sound, falling motion, silence/white space, reflection, or another visible carrier.
+3. **Pacing:** slow accumulation, steady progression, rapid burst, abrupt stop, held pause, or quiet release.
+4. **Text load and reveal point:** where long captions or dialogue must fit, and which beat must be withheld until the reader reaches it.
+5. **Continuity constraint:** stable left/right geography, an object path, a costume/state change, or a location transition that the layout must preserve.
+
+Route each page from that map to two or three structurally different candidates in the catalog, then choose the mechanism whose geometry performs the page's narrative job. Do not select a mechanism merely because it can contain the required number of panels. Record a one-sentence reason: `story state → visual carrier → chosen mechanism`.
+
+Apply these repetition checks unless the user explicitly locks a layout:
+
+- Do not reuse the same primary mechanism on adjacent pages unless the story deliberately repeats the same state or viewpoint; state that reason when it happens.
+- Across a series of four or more pages, one primary mechanism should normally appear no more than twice. A third use requires a clear recurring-pattern purpose rather than convenience.
+- A different panel count, crop, or percentage does not make the same SB mechanism different.
+- Accent mechanisms do not cure a repeated primary layout. If the page's dominant geometry is still the same, treat it as repeated.
+- After selection, read only the sequence of mechanism names. If it does not reflect the story's changes in pace and state, reselect before writing prompts.
+
+Useful state-to-mechanism routes include: elapsed time or waiting → 44/45; approach or mounting pressure → 23/24/50/61; dialogue or face-off → 21/25/26/33; sudden interruption or loud action → 06/30/55/66; object-caused reveal → 46/64; frozen embarrassment → 29/30/54; aftermath or emotional release → 31/53/54; psychological contrast or self-recognition → 32/37/62. These are candidate families, not fixed assignments.
 
 Do not combine multiple competing reading paths such as Z, S, and spiral on one page. Experimental structures with dense dialogue are usually a poor match. Keep one navigation logic obvious without arrows; add subtle arrows or numbering only when the chosen mechanism genuinely needs them.
 
@@ -62,4 +88,13 @@ For “one monk carries, two share, three avoid work, then no water,” a clarit
 
 Start from indispensable beats, then add only beats that improve setup, timing, clarity, or emotional landing. A mobile 3:4 page normally carries 3–6 major panels. Micro-panels may support reaction or motion chains without tiny text. Consider splitting at major time/location changes or more than six substantial beats only when page count is flexible; a fixed page count takes priority, and unresolved readability/content conflicts need clarification.
 
-Across a multi-page carousel, maintain one master visual system—same gutters, type hierarchy, palette, and reading direction—while changing the accent mechanism only when the story benefits.
+Across a multi-page carousel, maintain one master visual system—same gutters, type hierarchy, palette, and reading direction—while changing the primary mechanism when the narrative state changes. Shared gutters, typography, palette, and reading direction provide series unity; repeated page geometry is not required for continuity.
+
+## Multi-panel per canvas enforcement (单页多格与图文一体强制约束)
+
+- **Comic Page Definition:** For any comic asset type, one rendered image/page MUST be a finished multi-panel comic strip (e.g., 2–5 distinct panels separated by clear black gutters/borders), not an isolated single-camera scene.
+- **In-Prompt Text Embedding:** Never separate narration or dialogue into plain text outside the image generation prompt. Translate them into explicit in-canvas components:
+  - Narration must be written as a `rectangular caption box with Chinese text: "..."`.
+  - Dialogue must be written as a `white speech bubble pointing to [character] with Chinese text: "..."`.
+  - Sound effects must be written as `bold impact sound effect text: "【...】"`.
+- **Translating SB Mechanisms:** When generating prompts, translate the abstract SB mechanism (e.g., SB-004, SB-005, SB-025, SB-030) into exact geometric percentages and panel coordinates (e.g., top panel 60% height, bottom panels 40% height split into two), ensuring diffusion models render explicit comic panel divisions.

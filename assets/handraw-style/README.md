@@ -1,6 +1,6 @@
 # 本地手绘风格库
 
-当前收录 **001–277 种手绘风格**和 **30 种经典单色主题色**，与本地参考图一同打包。主 Skill 通过解析器读取资源，无需联网或重新安装上游仓库。
+当前收录 **001–278 种手绘风格**和 **30 种经典单色主题色**，与本地参考图一同打包。主 Skill 通过解析器读取资源，无需联网或重新安装上游仓库。
 
 - [排版与分镜画廊](skills/handdraw-style-prompter/gallery/layouts.html)：19 种社媒卡、32 种信息图、68 种分镜，预览与提示词均可离线查看。
 - [色彩画廊](skills/handdraw-style-prompter/gallery/colors.html)：30 种经典单色主题色及可复制提示词。
@@ -68,7 +68,7 @@ python -B -X utf8 skills/handdraw-style-prompter/scripts/validate_library.py
 
 ![G 201–216](images/G_201-216.webp)
 
-### H · 其他（217–277）
+### H · 其他（217–278）
 
 ![H 217–232](images/H_217-232.webp)
 
@@ -76,6 +76,6 @@ python -B -X utf8 skills/handdraw-style-prompter/scripts/validate_library.py
 
 ![H 249–264](images/H_249-264.webp)
 
-![H 265–277](images/H_265-277.webp)
+![H 265–278](images/H_265-278.webp)
 
 授权：[本库许可证](LICENSE) · [第三方授权](THIRD_PARTY_NOTICES.md)。

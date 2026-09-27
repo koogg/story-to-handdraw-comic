@@ -22,7 +22,7 @@ REFERENCE_ISOLATION_EN = (
     "clothing, prop, action, pose, setting, background, composition, layout, text, or story from the reference image. "
     "The user's written theme is the sole source for the image content."
 )
-GRAPHIC_TEXT_SUFFIX = "【如果主题直白包含画面元素那就按主题出图，文案由你来升华，但是不要直接描述画面。 如果主题比较概念化，那么文案和主题尽量保持一致，如果文案较长由你提炼，由你先设计画面隐喻（人类和非人类都行）再出图   。    文字参与构图，图文一体】"
+GRAPHIC_TEXT_SUFFIX = "【主题是整幅图片要传达的意思，不是必须上图的文字。先围绕主题发散情境、情绪、关系或视觉隐喻，选定画面创意，再创作与画面互补的简短文案；不默认照抄主题作标题，也不只用文字复述画面。只有明确要求必须出现或逐字保留的文字才按要求保留。文字参与构图，图文一体。】"
 
 
 def resolve_color(query: str) -> dict[str, str]:

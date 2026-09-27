@@ -17,14 +17,16 @@ Explicit user must-keeps: {only user-protected characters, objects, events, or o
 Required exact display copy: {mark each required quote LOCKED with speaker/placement, or none}
 Content boundaries: {forbidden changes/elements; permitted additions}
 
-STYLE ANCHOR
-Style number and generated name: #{STYLE} · {GENERATED_NAME}
+ART DIRECTION
+Catalog style number and generated name: #{STYLE} · {GENERATED_NAME}
 Positive visible traits: {PROMPT_TRAITS}
-The style label is catalog metadata; render the described visual traits and supplied reference rather than copying any existing character or artwork.
+Theme color: {optional matched prompt from colors.json, or omit}
+以该图作为艺术风格参考。
 
 PAGE STRUCTURE
 Primary storyboard mechanism: {ID and name}
 Optional accent mechanism: {ID and name, or none}
+Series layout role: {this page's story state and why this mechanism differs from or intentionally repeats adjacent pages}
 Expressiveness level: {clear / varied / experimental}
 Visual thesis: {the story contrast, movement, object, space, or payoff embodied by the page geometry}
 Reading order: {explicit path}
@@ -55,7 +57,9 @@ CONSTRAINTS
 Maintain the same character design, clothing, colors, and recurring props across all panels. No duplicate limbs or characters. Do not merge neighboring scenes. Preserve the stated page, navigation logic, and intentional hierarchy. Keep critical content inside the stated platform safe area. Do not regularize intentionally unequal panels or replace the stated visual thesis with a generic equal grid. Decorative effects cannot substitute for the specified timing, scale contrast, recurring object/background, route, or payoff hierarchy.
 ```
 
-When a numbered style reference image is attached, label its actual input index as STYLE in the attachment map and append this block. Apply it only to that input:
+The copyable prompt above is the prompt-mode form for ChatGPT web. Do not add a local reference path, filename, `STYLE` label, input index, attachment-role map, or upload instruction to its Markdown. The user sends the chosen style image together with the prompt, and the sentence `以该图作为艺术风格参考。` is the only attachment-facing instruction needed.
+
+The following block is for **direct image-generation tool calls only**, never for prompt-only Markdown. When a numbered style reference image is attached by the agent, label its actual input index as STYLE in the tool call's attachment map and append this block only to the tool-call prompt:
 
 ```text
 Use only the image labeled STYLE as a style reference. Extract its linework, brushwork, medium, material texture, color tendencies, shape language, and overall visual language. Do not copy any subject, person, clothing, prop, action, pose, setting, background, composition, panel layout, text, or story from STYLE. Separately labeled PERSON inputs supply the designated characters' visible appearance. The written continuity bible and panel plan control character assignment, costume, action, setting, dialogue, and story.
@@ -63,10 +67,32 @@ Use only the image labeled STYLE as a style reference. Extract its linework, bru
 
 ## Multi-page continuity
 
-Every page prompt repeats the full style anchor and continuity bible, plus the person-to-image mapping and likeness anchors when applicable. Read [person-reference.md](person-reference.md) for photo handling and input limits. Add a short page-state line describing only changes carried from the prior page, such as `red umbrella now open` or `left knee now muddy`. If attaching an earlier accepted page, label it as continuity-only and instruct the model not to copy its panel layout or story beats; it must not replace the original person's appearance with drift from earlier output.
+Every page prompt repeats the full style anchor and the complete continuity subset needed by that page, plus the person-to-image mapping and likeness anchors when applicable. For a serial project, load only the active characters' stable anchors and current state from the project files, not the entire cast archive. Read [person-reference.md](person-reference.md) for photo handling and input limits. Add a short page-state line describing only changes carried from the prior page, such as `red umbrella now open` or `left knee now muddy`. If attaching an approved character sheet or earlier accepted page, label it as continuity-only and instruct the model not to copy its layout or story beats; a prior page must not replace the original person reference or approved character baseline with accumulated drift.
 
 ## Text-light fallback
 
 When text is long or exact typography is more important than illustration, edit it down before generation. If long wording is truly locked, generate a clean page with empty reserved balloons/caption boxes, then provide the intended typesetting copy. Do not repeatedly regenerate the illustration for minor punctuation or harmless editorial variants, and do not pretend garbled or meaning-changing text is correct.
 
 Follow [rendering.md](rendering.md) for acceptance and retry limits. A page with empty balloons and separate copy is a **待排版 / awaiting typesetting** intermediate, not a finished publishable page.
+
+## Direct Multi-Panel Prompt Pattern (直接多格漫画生图提示词规范)
+
+When delivering copyable text-to-image prompts for a comic page (for modern multi-modal diffusion tools such as Flux, SD3, Midjourney v6, or Ideogram), the prompt MUST generate a complete multi-panel comic page on a single canvas, not an isolated single-camera illustration.
+
+1. **Explicit Multi-Panel Canvas Statement:**
+   Always start with an explicit layout declaration:
+   `A complete vertical comic strip page on a single canvas, [style traits], clean black panel borders with white gutters between panels. Aspect ratio [ratio].`
+2. **Explicit Panel Geometry & Navigation:**
+   Translate the chosen SB mechanism into clear spatial divisions:
+   - For SB-004: `One large horizontal panel at the top (60% height), two equal square reaction panels at the bottom side-by-side (40% height).`
+   - For SB-005: `Two upper compact panels (40% height), one wide payoff hero panel at the bottom (60% height).`
+   - For SB-025: `Four alternating shot/reverse-shot grid panels with dynamic gutters.`
+   - For SB-030: `Two tense top panels, an ultra-narrow horizontal strip in the middle, and a large payoff panel at the bottom.`
+   - For SB-046: `One central dominant square hero panel surrounded by detail reaction panels.`
+3. **Physicalized In-Image Text Elements (图文一体):**
+   NEVER separate dialogue or narration into external formatting notes outside the prompt. Physically embed every text element directly into the per-panel prompt description:
+   - **Narration/Captions:** `A rectangular caption box with Chinese text: "[TEXT]"` placed at the top or corner of the respective panel.
+   - **Dialogue:** `A clean white speech bubble pointing to [character] with pointer tail, containing Chinese text: "[TEXT]"`.
+   - **Sound Effects/Exclamations:** `Bold explosive sound effect text: "【[SFX]】"`.
+4. **Negative Constraints for Comic Strip:**
+   Ensure negative prompts explicitly forbid: `isolated single shot, single camera illustration, missing panel borders, text outside balloons, blurry speech bubbles`.

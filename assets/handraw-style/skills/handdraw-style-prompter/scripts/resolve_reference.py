@@ -64,7 +64,7 @@ def resolve(model: str, style: str, policy: dict | None = None) -> dict:
     traits_activation = entry.get("traits_activation", "unknown")
     if name_activation not in ALLOWED or traits_activation not in ALLOWED:
         raise ValueError("Invalid name_activation or traits_activation")
-    traits = positive_traits(style_record.get("traits", ""))
+    traits = style_record.get("traits", "") if number in ("240", "242", "259", "260") else positive_traits(style_record.get("traits", ""))
     if name_activation == "strong":
         activation_source = "name+style"
         use_reference_image = False

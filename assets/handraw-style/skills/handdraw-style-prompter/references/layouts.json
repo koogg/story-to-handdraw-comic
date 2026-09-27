@@ -815,6 +815,26 @@
     "name_en": "Hand-Drawn Editorial Knowledge Infographic"
   },
   {
+    "id": "IG-033",
+    "category": "infographic",
+    "name": "讲义式高密分析信息图",
+    "image": "../../../images/layouts/infographics/IG-033.webp",
+    "prompt_file": "layouts/IG-033.md",
+    "keywords": [
+      "讲义式排版",
+      "高信息密度",
+      "总览分解总结",
+      "编号分析模块",
+      "表格容器",
+      "步骤流程区",
+      "思维导图决策树",
+      "重点结论区",
+      "易错提醒",
+      "知识点结构化"
+    ],
+    "name_en": "High-Density Handout Analytical Infographic"
+  },
+  {
     "id": "SB-001",
     "category": "comic-storyboard",
     "name": "规则网格",

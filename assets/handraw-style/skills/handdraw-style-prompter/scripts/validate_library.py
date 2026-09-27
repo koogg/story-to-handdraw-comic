@@ -18,7 +18,7 @@ except ModuleNotFoundError as error:
 from style_asset_paths import bucket_name, grid_path, single_path
 
 SKILL = Path(__file__).resolve().parents[1]
-GRAPHIC_TEXT_SUFFIX = "【如果主题直白包含画面元素那就按主题出图，文案由你来升华，但是不要直接描述画面。 如果主题比较概念化，那么文案和主题尽量保持一致，如果文案较长由你提炼，由你先设计画面隐喻（人类和非人类都行）再出图   。    文字参与构图，图文一体】"
+from prompt_style import GRAPHIC_TEXT_SUFFIX
 
 
 def fail(message: str) -> None:
@@ -115,6 +115,12 @@ def main() -> None:
     style_205 = next(item for item in styles if item["number"] == "205")
     if not style_205["traits"] or "坚持伟大式轻幽默Q版漫画" not in style_205["traits"]:
         fail("style 205 core visual traits are missing")
+    style_259 = resolve("gpt-image-2", "259")
+    if style_259["use_reference_image"] or "杜绝默认套用" not in style_259["prompt_traits"]:
+        fail("style 259 must preserve its theme-specific Van Gogh constraint")
+    style_242 = resolve("gpt-image-2", "242")
+    if style_242["use_reference_image"] or "不要用脸谱和头饰" not in style_242["prompt_traits"]:
+        fail("style 242 must preserve its modern-character opera constraint")
     if any(item["group"] != "G 附件新增 / 中国当代插画补充" for item in styles[200:216]):
         fail("201–216 must remain in group G")
     if any(item["group"] != "H 其他" for item in styles[216:]):
@@ -195,13 +201,16 @@ def main() -> None:
         fail("pure-image reference is missing content-isolation guidance")
 
     theme = "世界就是个草台班子\n原文  空格与标点！"
-    graphic = draft(217, theme, "--mode", "graphic-text")
+    required_text = "必须出现：月满龙城"
+    graphic = draft(217, theme, "--mode", "graphic-text", "--text", required_text)
     if not graphic["use_reference_image"] or graphic["reference_path"] != str(grid_path(217)) or not graphic["reference_available"]:
         fail("graphic-text result must expose the required grid outside its prompts")
     for key in ("chinese_prompt", "english_prompt"):
         prompt = graphic[key]
         if prompt.count(theme) != 1 or not prompt.endswith(GRAPHIC_TEXT_SUFFIX) or prompt.count(GRAPHIC_TEXT_SUFFIX) != 1:
-            fail("graphic-text must preserve theme and exact final suffix in both prompts")
+            fail("graphic-text draft must pass creative direction and its interpretation instruction")
+        if prompt.count(required_text) != 1:
+            fail("graphic-text must retain explicit display-text constraints separately from the theme")
         if graphic["reference_path"] in prompt or "所附图片仅用于参考画风" in prompt or "Use the attached image only as a style reference" in prompt:
             fail("graphic-text copyable prompt leaked reference instructions")
     graphic_text = subprocess.run(
@@ -210,7 +219,7 @@ def main() -> None:
     if "当前处于纯图模式" in graphic_text.stdout or str(grid_path(217)) not in graphic_text.stdout.split("Reference image (outside copyable prompts):", 1)[-1]:
         fail("graphic-text CLI must show its external reference without reporting pure-image mode")
 
-    # The byte-exact suffix is a maintained asset shared by the CLI and instructions.
+    # Keep the CLI's creative-direction instruction consistent with its guide.
     mode_guide = (SKILL / "references/graphic-text.md").read_text(encoding="utf-8")
     if GRAPHIC_TEXT_SUFFIX not in mode_guide:
         fail("graphic-text reference lost the exact suffix required by the prompt contract")

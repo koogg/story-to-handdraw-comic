@@ -342,16 +342,16 @@
           "traits_activation": "none"
         },
         "240": {
-          "name_activation": "none",
-          "traits_activation": "none"
+          "name_activation": "weak",
+          "traits_activation": "strong"
         },
         "241": {
           "name_activation": "none",
           "traits_activation": "none"
         },
         "242": {
-          "name_activation": "none",
-          "traits_activation": "none"
+          "name_activation": "weak",
+          "traits_activation": "strong"
         },
         "243": {
           "name_activation": "none",
@@ -418,12 +418,12 @@
           "traits_activation": "strong"
         },
         "259": {
-          "name_activation": "none",
-          "traits_activation": "none"
+          "name_activation": "weak",
+          "traits_activation": "strong"
         },
         "260": {
-          "name_activation": "none",
-          "traits_activation": "none"
+          "name_activation": "weak",
+          "traits_activation": "strong"
         },
         "261": {
           "name_activation": "none",
@@ -490,6 +490,10 @@
           "traits_activation": "strong"
         },
         "277": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "278": {
           "name_activation": "weak",
           "traits_activation": "strong"
         }

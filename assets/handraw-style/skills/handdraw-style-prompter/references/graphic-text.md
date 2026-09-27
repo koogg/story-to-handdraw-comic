@@ -1,15 +1,15 @@
 # Graphic-text mode
 
-Read only for 图文模式 / `graphic-text`. Preserve the supplied theme verbatim after `主题：` / `Theme:` in both languages; do not translate or expand it into scenes, characters, metaphors, or commentary. Put explicit constraints and any article image-type field outside the theme.
+Read only for 图文模式 / `graphic-text`. The supplied theme describes what the entire image should communicate; it is not mandatory display text. Develop concrete scenes, characters, relationships, or metaphors from its meaning, then compose concise copy that adds to the visual idea rather than merely describing it. Keep creative direction and actual display text in separately labeled fields. Only explicit requirements to print or preserve particular words make those words mandatory; quotation marks around a theme alone do not. Preserve required facts and visual elements without automatically printing their names.
 
-For a standalone opinion, reflection, or aphorism, default to one integrated image with a sentence/paragraph and no storyboard. Do not invent panel sequences. When assembling its prompt, put the no-panels composition requirement outside the preserved theme and before the fixed suffix. An explicit comic request may override this form. This wrapper preserves the input theme for the image model; a calling workflow with already-adapted copy may use its own single-image prompt contract directly.
+For a standalone opinion, reflection, or aphorism, default to one integrated image with a sentence/paragraph and no storyboard. Do not invent panel sequences. An explicit comic request may override this form. A calling workflow with already-adapted copy uses its own prompt contract directly; do not restart its writing pass.
 
-Append this exact suffix to both copyable prompts, retaining all spaces and punctuation:
+The CLI uses this instruction for drafts that still need creative development. For conversational delivery, resolve the visual idea and display copy yourself instead of leaving those decisions to a suffix:
 
 ```text
-【如果主题直白包含画面元素那就按主题出图，文案由你来升华，但是不要直接描述画面。 如果主题比较概念化，那么文案和主题尽量保持一致，如果文案较长由你提炼，由你先设计画面隐喻（人类和非人类都行）再出图   。    文字参与构图，图文一体】
+【主题是整幅图片要传达的意思，不是必须上图的文字。先围绕主题发散情境、情绪、关系或视觉隐喻，选定画面创意，再创作与画面互补的简短文案；不默认照抄主题作标题，也不只用文字复述画面。只有明确要求必须出现或逐字保留的文字才按要求保留。文字参与构图，图文一体。】
 ```
 
 If a style reference is required, display the resolved image outside both copyable prompts; when image display is unavailable, provide a separate reference link/path for upload. Neither copyable prompt contains a local path, upload instruction, or reference-isolation block.
 
-For actual generation, attach the required image and prepend the STYLE-only isolation instruction from SKILL.md to the chosen copyable prompt. The copyable prompt (including theme and final suffix) remains an unchanged block; the complete tool prompt therefore has additional reference instructions before it. Do not append anything after the suffix. Keep other inputs labeled separately.
+For actual generation, attach the required image and prepend the STYLE-only isolation instruction from SKILL.md to the chosen copyable prompt. Preserve the selected visual concept and display copy. Keep other inputs labeled separately.

@@ -40,6 +40,35 @@ class SkillStructureTests(unittest.TestCase):
         ui.write_text('interface:\n  default_prompt: "Use $sample-skill"\n', encoding="utf-8")
         self.assertEqual(validate(self.root), [])
 
+    def test_discovered_skills_have_unique_names(self):
+        self.skill.write_text(self.valid, encoding="utf-8")
+        nested = self.root / "nested"
+        nested.mkdir()
+        child = nested / "SKILL.md"
+        child.write_text(self.valid, encoding="utf-8")
+        self.assertTrue(any("duplicate skill name" in error for error in validate(self.root)))
+        child.write_text(self.valid.replace("sample-skill", "nested-skill"), encoding="utf-8")
+        self.assertEqual(validate(self.root), [])
+
+    def test_ui_metadata_reports_invalid_shapes_without_crashing(self):
+        self.skill.write_text(self.valid, encoding="utf-8")
+        agents = self.root / "agents"
+        agents.mkdir()
+        ui = agents / "openai.yaml"
+        for content in ("[]", "null", "interface: []", "interface:\n  default_prompt: 123"):
+            with self.subTest(content=content):
+                ui.write_text(content, encoding="utf-8")
+                self.assertTrue(any("invalid UI metadata" in error for error in validate(self.root)))
+
+    def test_ui_prompt_rejects_another_skill_with_same_prefix(self):
+        self.skill.write_text(self.valid, encoding="utf-8")
+        agents = self.root / "agents"
+        agents.mkdir()
+        (agents / "openai.yaml").write_text(
+            'interface:\n  default_prompt: "Use $sample-skill-extra"\n', encoding="utf-8"
+        )
+        self.assertTrue(validate(self.root))
+
 
 if __name__ == "__main__":
     unittest.main()

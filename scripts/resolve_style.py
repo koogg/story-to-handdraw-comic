@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -29,9 +30,15 @@ STYLE_INDEX = (
 
 
 def resolve(model: str, style: str) -> dict:
+    # Accept explicit style notation, never extract a number from a layout,
+    # color ID, decimal, range, or an arbitrary sentence.
+    match = re.fullmatch(
+        r"\s*(?:(?:画风|风格)(?:编号)?\s*[:：]?\s*)?#?\s*([0-9]{1,3})\s*",
+        style,
+    )
+    style_num = f"{int(match.group(1)):03}" if match else ""
     styles = json.loads(STYLE_INDEX.read_text(encoding="utf-8"))
-    number = f"{int(style):03}" if style.isascii() and style.isdigit() else ""
-    if not any(item["number"] == number for item in styles):
+    if not any(item["number"] == style_num for item in styles):
         raise ValueError(f"风格编号 {style!r} 无效；请输入 001–{len(styles):03}")
     if not UPSTREAM_RESOLVER.is_file():
         raise FileNotFoundError(f"Bundled resolver not found: {UPSTREAM_RESOLVER}")
@@ -41,11 +48,14 @@ def resolve(model: str, style: str) -> dict:
     completed = subprocess.run(
         [
             sys.executable,
+            "-B",
+            "-X",
+            "utf8",
             str(UPSTREAM_RESOLVER),
             "--model",
             model,
             "--style",
-            style,
+            style_num,
         ],
         check=True,
         capture_output=True,

@@ -34,7 +34,7 @@ Maintain an attachment map matching the tool's actual input order:
 
 - `PERSON_A`: photo(s) for character A's visible appearance only.
 - `STYLE`: numbered style image for linework, medium, palette, and shape language only.
-- `CONTINUITY`: a previously accepted comic page for established stylized appearance, costume, and story state only.
+- `CONTINUITY`: a previously accepted comic page or approved fictional-character sheet for established stylized appearance, costume, proportions, and story state only.
 
 The style resolver's `use_reference_image` flag controls **STYLE only**. A false value never means discard a supplied person photo. Do not let style-image characters replace the user, blend multiple people's features, or use a previous page's drift to override the original person reference.
 
@@ -45,8 +45,8 @@ If the tool cannot take both a person photo and a required style image, explain 
 ## Workflow and quality
 
 1. Add the image-to-character map, likeness priority, visible anchors, and story-designed costume to the continuity bible. Present a short human-readable summary with the normal pre-generation plan; no extra approval gate for usable supplied photos.
-2. Generate the first requested comic page directly with the photo and style inputs. Use this page as the stylized continuity anchor after checking it. Create a separate character sheet only when the user requests it; do not add an unrequested preparatory image by default.
-3. For later pages, retain the same person reference, written anchors, and style; also pass the checked page when supported. If input capacity is limited, omit the optional continuity page before dropping a required person/style reference.
+2. Generate the first requested comic page directly with the photo and style inputs. Use this page as the stylized continuity anchor after checking it. Create a separate character sheet only when the user requests it or when initializing a confirmed serial-comic project whose recurring cast needs a long-term visual baseline; do not add an unrequested preparatory image for ordinary one-off work.
+3. For later pages, retain the same person reference, written anchors, and style; also pass the approved character sheet or checked page when supported. If input capacity is limited, omit an optional prior page before dropping a required person/style reference or an approved serial character baseline.
 4. Inspect each result against the supplied photo and written anchors: face/hairstyle/glasses where visible, no character swaps or blended faces, consistent proportions across panels, and preservation of the selected style. Do not mistake a generic same-hairstyle avatar for detailed facial likeness. Consider whether panel size allows the requested facial detail before retrying.
 5. Correct substantive loss of distinguishing features with targeted edits that preserve layout, dialogue, and other characters. Reference/likeness corrections share the page budget in [rendering.md](rendering.md); changing prompts or continuity anchors does not reset it. Disclose remaining differences at the limit.
 

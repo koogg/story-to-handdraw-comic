@@ -5,7 +5,7 @@ description: Resolve a local hand-drawn style number and theme into bilingual im
 
 # Hand-drawn Style Prompter
 
-Default to prompts only; an explicit request to generate/render/preview authorizes generation. Use the supplied theme and constraints without inventing copy or unrelated content. Article illustration planning belongs to [article-illustration-planner](../article-illustration-planner/SKILL.md); callers needing only style resolution can use the resolver directly.
+Default to prompts only; an explicit request to generate/render/preview authorizes generation. Treat the supplied theme as creative direction, not mandatory display text. Develop visible ideas that express its meaning and respect explicit constraints; create complementary copy in graphic-text mode, and preserve exact wording only when explicitly requested. Article illustration planning belongs to [article-illustration-planner](../article-illustration-planner/SKILL.md); callers needing only style resolution can use the resolver directly.
 
 ## Inputs and paths
 
@@ -36,7 +36,7 @@ Apply this isolation instruction only to the input labeled STYLE; translate it f
 Default to `pure-image`; retain a mode already chosen in this conversation. Accept 纯图模式 / 图文模式 and CLI `--mode pure-image|graphic-text`.
 
 - **Pure-image:** describe concrete visible content implied by the theme. Include required reference path/upload guidance and STYLE isolation inside both copyable prompts. Respect explicit text requests; otherwise do not invent on-image copy.
-- **Graphic-text:** read [references/graphic-text.md](references/graphic-text.md) for verbatim theme, exact suffix, external reference display, and actual tool-prompt assembly.
+- **Graphic-text:** read [references/graphic-text.md](references/graphic-text.md) for theme interpretation, display-copy creation, external reference display, and actual tool-prompt assembly.
 
 Return the selected number/name and two copyable prompts:
 
@@ -60,4 +60,4 @@ Correct substantive defects only, with at most three retries after the first att
 - Read-only library validation: `python -B -X utf8 scripts/validate_library.py`
 - Style additions only: use the [importer](../../.agents/skills/style-library-importer/SKILL.md). Do not run rebuild/import utilities for ordinary prompts.
 
-The CLI makes deterministic drafts; conversational English should be naturally translated in pure-image mode. Graphic-text themes remain verbatim in both languages.
+The CLI makes deterministic drafts that pass the theme as creative direction; conversational prompts should develop the actual visual concept and display copy before delivery. English creative direction can be naturally translated; preserve the intended language of display copy and any explicitly locked wording.

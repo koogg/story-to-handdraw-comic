@@ -24,7 +24,7 @@ Reference: [Xiaohongshu Open Platform image ratios](https://school.xiaohongshu.c
 ## WeChat Official Account
 
 - Use portrait comic pages inside the article body. A `3:4` master works well for phone reading and can be reused on other platforms.
-- Create the article cover as a separate derivative, not a crop of a text-heavy comic page. Default head-cover ratio: `2.35:1`, commonly produced at `900 × 383` or a larger proportional size.
+- When a separate article cover is requested, design it as a derivative rather than cropping a text-heavy comic page. It counts toward the agreed deliverables. Default head-cover ratio: `2.35:1`, commonly produced at `900 × 383` or a larger proportional size.
 - Keep the cover's core face/object and short hook inside the central square-safe region because shares and secondary placements may crop toward `1:1`.
 - For a sequence in the article body, add modest breathing space between pages and avoid repeating a large title on every page.
 
@@ -35,7 +35,7 @@ Reference: [WeChat cover production sizes](https://www.canva.cn/sizes/wechat-off
 When the user names a platform, honor the selected form and output count. Single-graphic returns its one finished image. For comic series or an explicitly requested publishing package, include useful derivatives within that scope:
 
 - Xiaohongshu: portrait cover/content sequence and suggested reading order.
-- WeChat: portrait body page(s), a separate wide head cover when requested or clearly useful, and a square-safe crop note.
-- Both: create one 3:4 master sequence, then generate or crop platform-specific covers without changing the comic's story.
+- WeChat: portrait body page(s), a separate wide head cover only when included in the requested package, and a square-safe crop note.
+- Both: create one 3:4 master sequence; generate or crop platform-specific covers only when included in the agreed count/package, without changing the comic's story. Naming a platform alone does not authorize additional images.
 
 Do not promise that an image-generation model can place long Chinese typography perfectly. Inspect all large hooks and essential dialogue. Minor punctuation variation is not a reason to regenerate an otherwise publishable page.

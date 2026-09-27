@@ -13,6 +13,14 @@
 
 预览已全部保存在本地，可通过目录或[离线排版画廊](../assets/handraw-style/skills/handdraw-style-prompter/gallery/layouts.html)按需查看，仅参考布局。预览不可用时可依据目录文字继续，并如实说明未查看预览。若把预览附给生图工具，先检查图片并标为 LAYOUT，仅用于位置、比例、层级和阅读顺序，不复制其文字、角色、内容或画风；与 STYLE、PERSON 分别标明用途。
 
+## 表现力优先
+
+社媒卡和信息图默认把每张图当作独立视觉作品：围绕本页内容选择最有力的主体、动作、场景、尺度、视觉隐喻和排版，不自动复用同一人物、服装、场景或构图。多页只共享已选画风及用户明确要求的品牌或系列锚点；用户未要求统一版式时，可为不同内容选择不同但合适的 SC-/IG- 机制。
+
+SC-/IG- 编号规定的是关键结构、层级、信息关系和阅读顺序，不是必须机械执行的坐标或百分比。只在文字安全区、数据比较或用户明确尺寸要求确有必要时写精确比例。逐字文字只锁定文字，不能据此锁死画面；避免为统一而添加固定主角、固定服装、固定背景或与内容无关的连续性设定，也避免堆叠不会改变结果的长串禁止项。
+
+信息图的表现力不得牺牲事实：数值、单位、排序、因果、分类、比例与连线关系仍是硬约束；人物和场景一致性通常不是。社媒卡则优先形成鲜明主视觉和图文张力，只在用户明确要求套系一致时收紧变化范围。
+
 ## 文本与信息组织
 
 社媒卡可按主技能的创作性改编生成有表现力的短文案；逐字保留和指定文字仍优先。双区卡是观点、前后或对照关系，不强制编成漫画故事。
@@ -25,14 +33,28 @@
 
 ## 生图提示词与验收
 
-输出计划为 **画风 → 类型 → 文本 → 排版**，同时说明语调与已选可选项；排版写明编号、名称、阅读顺序和信息区，不输出分镜字段。仅要方案或提示词时止于此，要求出图时按 [rendering.md](rendering.md) 生成。
+输出计划为 **画风 → 类型 → 文本 → 排版**，同时说明语调与已选可选项；排版写明编号、名称、阅读顺序和信息区，不输出分镜字段。仅要求展示方案而不要求写入提示词文件时止于此；要求写入提示词文件或要求出图时，均需按 [rendering.md](rendering.md) 继续执行。
 
-每张图的提示词需独立包含：
+每张图的提示词必须遵循以下契约结构进行组装，以保持输出稳定性：
 
-- 类型（social-card 或 infographic）、输出数量、比例和用途。
-- 解析后的画风编号、生成名称、所需正向特征，以及实际 STYLE / PERSON / LAYOUT 附件及各自职责。
-- 选定的 SC-/IG- 编号、名称及目录中的排版要求，结合实际内容明确位置、视觉比例和阅读顺序。不能只给编号期待模型知道版式。
-- 全部最终展示文字及放置位置；明确锁定内容。社媒卡使用已完成的改编文案，信息图保持已核对的事实、标签与对应关系。
-- 主次层级、留白和手机端可读性；必要的数据单位、图例、来源与日期。禁止加入未计划的文字或用无关装饰填充。
+```text
+Asset type: {social-card or infographic}
+Canvas and audience: {ratio; intended readers/destination if supplied}.
+Style: #{number} · {generation_name}; {resolver-required positive traits}.
+Theme color: {optional matched prompt from colors.json, or omit}.
+Layout mechanism: {SC-/IG- ID and name}; {its spatial structure and reading order from the catalog}.
+Core idea and tone: {retained broad meaning or factual relationship; selected attitude}.
+Information zones & display text:
+- Zone 1 ({placement/role}): "{text}"
+- Zone 2 ({placement/role}): "{text}"
+(List all zones with exact adapted copy or checked factual text. Identify explicitly LOCKED spans.)
+Visual concept & hierarchy: {how elements and empty space are arranged; mobile legibility}.
+Explicit must-keeps: {only user-required elements, or omit}.
+Style reference instruction: {when a style image accompanies the prompt, write exactly “以该图作为艺术风格参考。”; otherwise omit}.
+Other reference mapping: {only PERSON or LAYOUT relationships required to understand the supplied images; otherwise omit}.
+Render the specified layout mechanism. Do not hallucinate unrequested facts, data, or decorative text.
+```
 
 检查文字、信息完整性、编号对应的布局特征、图文对应关系、阅读顺序及事实/数值/连线准确性。多区社媒卡和信息图不能套用 single-graphic 的“必须无分区”检查。共用 rendering 的每图重试上限，不因切换类型重置。无法可靠呈现精确文字或数据时标记待排版/待修正，不宣称成品准确。保存名可用 social-card-01.png、infographic-01.png；工具不可用时保存对应的完整提示词文件。
+
+提示词模式面向 ChatGPT 网页时，不把本地画风路径、文件名、STYLE 标签、输入序号、附件角色表或上传说明写入 Markdown；若使用画风参考图，每个可复制提示词仅加入一次“以该图作为艺术风格参考。”。直接调用生图工具时才按工具要求传递和标记附件。
