@@ -78,7 +78,7 @@ def main() -> None:
         fail("gpt-image-2 style with positive traits should use name+traits activation")
     synthetic = {"default": model_capabilities["default"], "models": {
         "test-model": {"name_activation": "unknown", "traits_activation": "strong", "styles": {
-            "201": {"name_activation": "none"},
+            "201": {"name_activation": "none", "traits_activation": "none"},
             "002": {"name_activation": "strong"},
             "022": {"name_activation": "none", "traits_activation": "none"},
         }},
@@ -95,8 +95,8 @@ def main() -> None:
     traits_case = resolve("gpt-image-2", "022")
     if traits_case["activation_source"] != "name+style+traits" or not traits_case["prompt_traits"] or "避免" in traits_case["prompt_traits"]:
         fail("gpt-image-2 traits activation did not produce filtered positive traits")
-    if resolve("gpt-image-2", "201")["use_reference_image"] is not True:
-        fail("empty-trait style must use reference image")
+    if resolve("gpt-image-2", "201")["activation_source"] != "name+style+traits" or resolve("gpt-image-2", "201")["use_reference_image"] is not False:
+        fail("style 201 should use name+style+traits activation")
     if bucket_name(1) != "001-200" or bucket_name(217) != "201-400" or bucket_name(401) != "401-600":
         fail("style asset bucket calculation is incorrect")
     reference_217 = resolve("gpt-image-2", "217")
@@ -110,10 +110,10 @@ def main() -> None:
         reference = resolve("unregistered-model", f"{number:03}")
         if grid_path(number).exists() or reference["reference_path"] != str(single_path(number)):
             fail(f"single-image style {number:03} must not retain a redundant grid reference")
-    if any(item["traits"] for item in styles[200:216] if item["number"] != "205"):
-        fail("201–216 core visual traits may only be populated for style 205")
+    if any(not item["traits"] for item in styles[200:216]):
+        fail("201–216 core visual traits must be populated")
     style_205 = next(item for item in styles if item["number"] == "205")
-    if not style_205["traits"] or "坚持伟大式轻幽默Q版漫画" not in style_205["traits"]:
+    if not style_205["traits"] or "猫狗性格" not in style_205["traits"]:
         fail("style 205 core visual traits are missing")
     style_259 = resolve("gpt-image-2", "259")
     if style_259["use_reference_image"] or "杜绝默认套用" not in style_259["prompt_traits"]:
@@ -229,7 +229,7 @@ def main() -> None:
             fail(f"style {number} must retain positive traits")
         if result["use_reference_image"] != (number == 217):
             fail(f"style {number} uses the wrong reference activation path")
-    blank = draft(214)
+    blank = draft(269, "海底世界", "--model", "unregistered-model")
     if not blank["use_reference_image"] or "核心风格特征：" in blank["chinese_prompt"]:
         fail("blank traits must stay empty while preserving reference fallback")
     for value in (str(total_styles + 1), "0", "abc", "-1"):
