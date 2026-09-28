@@ -299,6 +299,48 @@
     "name_en": "Asymmetric Hero & Group Cluster Card"
   },
   {
+    "id": "SC-021",
+    "category": "social-card",
+    "name": "自适应双拼照片转译社媒卡",
+    "image": "../../../images/layouts/social-cards/SC-021.webp",
+    "prompt_file": "layouts/SC-021.md",
+    "keywords": [
+      "自适应双拼",
+      "竖版左右拼",
+      "横版上下拼",
+      "照片转译",
+      "实景转绘",
+      "前后对比",
+      "真实与艺术",
+      "微排版",
+      "四周负空间",
+      "四周留白"
+    ],
+    "name_en": "Adaptive Split Photo-to-Art Social Card"
+  },
+  {
+    "id": "SC-022",
+    "category": "social-card",
+    "name": "姓名四款签名设计展示卡",
+    "image": "../../../images/layouts/social-cards/SC-022.webp",
+    "prompt_file": "layouts/SC-022.md",
+    "keywords": [
+      "姓名签名设计",
+      "四款签名方案",
+      "上下分割排版",
+      "顶部姓名展示区",
+      "底部2x2四宫格",
+      "细虚线分隔",
+      "飘逸签名",
+      "锋势签名",
+      "回环签名",
+      "极简签名",
+      "手写签名设计稿",
+      "9:16竖版"
+    ],
+    "name_en": "Name-to-Four-Signature Showcase Card"
+  },
+  {
     "id": "IG-001",
     "category": "infographic",
     "name": "标题金字塔图标信息图",
@@ -331,18 +373,20 @@
   {
     "id": "IG-003",
     "category": "infographic",
-    "name": "多行左右对比信息图",
+    "name": "多行左文右图信息图",
     "image": "../../../images/layouts/infographics/IG-003.webp",
     "prompt_file": "layouts/IG-003.md",
     "keywords": [
-      "多行对比",
+      "多行图文",
+      "左文右图",
       "主标题",
-      "左侧文字",
-      "右侧图片",
-      "逐行比较",
+      "行程路线",
+      "图鉴速览",
+      "分类清单",
+      "多行对比",
       "信息图"
     ],
-    "name_en": "Multi-Row Side-by-Side Comparison"
+    "name_en": "Multi-Row Left-Text Right-Image Infographic"
   },
   {
     "id": "IG-004",
@@ -1677,17 +1721,17 @@
   {
     "id": "SB-057",
     "category": "comic-storyboard",
-    "name": "主视觉叙事漫画",
+    "name": "海报式漫画",
     "image": "../../../images/layouts/comic-storyboards/SB-057.webp",
     "prompt_file": "layouts/SB-057.md",
     "keywords": [
       "漫画分镜",
-      "主视觉叙事漫画",
+      "海报式漫画",
       "主视觉封面",
       "画中嵌入",
       "故事附着"
     ],
-    "name_en": "Hero-Visual Narrative"
+    "name_en": "Poster-Style Narrative"
   },
   {
     "id": "SB-058",

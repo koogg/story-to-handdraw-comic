@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Temporary and preview files
+_preview-chrome/
+temp/
+downloads/
+output/
+*.tmp
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Local workspace agent configuration
+.agents/
+.workbuddy/
+download.txt

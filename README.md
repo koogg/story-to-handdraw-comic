@@ -51,9 +51,9 @@ flowchart TD
 
 | 资料 | 当前范围 | 本地预览 |
 |---|---|---|
-| 画风 | 001–278，共 278 种 | [画风画廊](assets/handraw-style/skills/handdraw-style-prompter/gallery/index.html) |
-| 主题色 | C-01–C-30，共 30 种 | [色彩画廊](assets/handraw-style/skills/handdraw-style-prompter/gallery/colors.html) |
-| 社媒卡 | SC-001–SC-020，跳过 SC-013，共 19 种 | [社媒卡画廊](assets/handraw-style/skills/handdraw-style-prompter/gallery/layouts.html#social-card) |
+| 画风 | 001–279，共 279 种 | [画风画廊](assets/handraw-style/skills/handdraw-style-prompter/gallery/index.html) |
+| 主题色 | C-01–C-36，共 36 种 | [色彩画廊](assets/handraw-style/skills/handdraw-style-prompter/gallery/colors.html) |
+| 社媒卡 | SC-001–SC-022，跳过 SC-013，共 21 种 | [社媒卡画廊](assets/handraw-style/skills/handdraw-style-prompter/gallery/layouts.html#social-card) |
 | 信息图 | IG-001–IG-033，共 33 种 | [信息图画廊](assets/handraw-style/skills/handdraw-style-prompter/gallery/layouts.html#infographic) |
 | 分镜 | SB-001–SB-068，共 68 种 | [分镜画廊](assets/handraw-style/skills/handdraw-style-prompter/gallery/layouts.html#comic-storyboard) |
 
@@ -124,7 +124,7 @@ flowchart TD
 
 | 类型 | 可选字段 | 省略时 |
 |---|---|---|
-| 社媒卡 | 排版 / 图型：SC 编号或名称 | 按短文案和图文关系选择；共 19 种，原库没有 SC-013。 |
+| 社媒卡 | 排版 / 图型：SC 编号或名称 | 按短文案和图文关系选择；共 21 种，原库没有 SC-013。 |
 | 信息图 | 排版 / 图型：IG 编号或名称 | 按对比、流程、时间、层级、分类等信息关系选择；共 33 种。 |
 | 分镜漫画 | 分镜：SB-001–SB-068、本地同号简写（01–68）、名称，或明确格数 | 先改编内容，再选适合叙事的分镜。 |
 | 分镜漫画 | 分镜表现力：稳妥清晰 / 富有变化 / 大胆实验 | 富有变化。 |
@@ -297,7 +297,7 @@ flowchart TD
 
 - [风格画廊](assets/handraw-style/skills/handdraw-style-prompter/gallery/index.html) · [编号目录](assets/handraw-style/styles_200_reorganized.md)
 - [分镜目录](references/storyboard-catalog.md) · [分镜样例](assets/handraw-style/skills/handdraw-style-prompter/gallery/layouts.html#comic-storyboard)
-- [社媒卡与信息图使用说明](references/social-infographic.md) · [52 种社媒卡与信息图排版目录](references/social-infographic-catalog.md)
+- [社媒卡与信息图使用说明](references/social-infographic.md) · [54 种社媒卡与信息图排版目录](references/social-infographic-catalog.md)
 - [Skill 行为说明](SKILL.md)
 - [单张图文](references/single-graphic.md)：观点、感悟的一句话或一段话配一张图，不分镜。
 - [生成与验收](references/rendering.md)：参考图、逐页检查、重试上限及未完成状态。

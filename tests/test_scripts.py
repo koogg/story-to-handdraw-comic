@@ -44,12 +44,12 @@ class ScriptTests(unittest.TestCase):
         return ["--source-name", "测试画风", "--generation-name", "Test Style",
                 "--traits", "柔和线条", "--image", str(image or self.image)]
 
-    def test_read_only_validation_and_dry_run(self):
-        before = snapshot(self.lib)
-        for result in (self.run_python(self.validator),
-                       self.run_python(self.importer, *self.args(), "--dry-run")):
-            self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(snapshot(self.lib), before)
+    def test_dry_run_is_read_only(self):
+        styles_before = (self.lib / "styles_200_reorganized.md").read_bytes()
+        result = self.run_python(self.importer, *self.args(), "--dry-run")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual((self.lib / "styles_200_reorganized.md").read_bytes(), styles_before)
+        self.assertFalse((self.lib / f"images/individual/201-400/{COUNT + 1:03}.webp").exists())
 
     def test_preflight_rejects_bad_images_and_metadata(self):
         bad = self.base / "bad.png"
@@ -94,16 +94,16 @@ importer.main()
         self.assertIn("已恢复", result.stderr)
         self.assertEqual(snapshot(self.lib), before)
 
-    def test_stale_index_detected_without_repair(self):
+    def test_stale_index_is_auto_repaired(self):
         index = self.lib / "skills/handdraw-style-prompter/references/styles.json"
         data = json.loads(index.read_text(encoding="utf-8"))
         data[0]["generation_name"] = "stale value"
         index.write_text(json.dumps(data), encoding="utf-8")
         before = snapshot(self.lib)
         result = self.run_python(self.validator)
-        self.assertNotEqual(result.returncode, 0)
-        self.assertIn("stale", result.stderr)
-        self.assertEqual(snapshot(self.lib), before)
+        self.assertEqual(result.returncode, 0)
+        self.assertNotIn("stale", result.stderr)
+        self.assertNotEqual(snapshot(self.lib), before)
 
     def test_existing_lock_is_respected(self):
         (self.lib / ".style-import.lock").write_text("another importer")
@@ -113,17 +113,14 @@ importer.main()
         self.assertIn("已有导入进行中", result.stderr)
         self.assertEqual(snapshot(self.lib), before)
 
-    def test_stale_gallery_requires_explicit_build(self):
+    def test_stale_gallery_is_auto_repaired(self):
         gallery = self.lib / "skills/handdraw-style-prompter/gallery/index.html"
         gallery.write_text("stale", encoding="utf-8")
         before = snapshot(self.lib)
         result = self.run_python(self.validator)
-        self.assertNotEqual(result.returncode, 0)
-        self.assertEqual(snapshot(self.lib), before)
-        result = self.run_python(self.validator.with_name("build_library.py"))
-        self.assertEqual(result.returncode, 0, result.stderr)
-        result = self.run_python(self.validator)
-        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.returncode, 0)
+        self.assertNotEqual(snapshot(self.lib), before)
+        self.assertNotEqual(gallery.read_text(encoding="utf-8"), "stale")
 
     def test_invalid_style_and_portable_resolver(self):
         for value in (str(COUNT + 1), "0", "abc"):

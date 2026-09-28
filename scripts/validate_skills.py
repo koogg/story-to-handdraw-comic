@@ -65,7 +65,9 @@ def validate(root: Path) -> list[str]:
 
     for path in root.rglob("*.md"):
         content = path.read_text(encoding="utf-8")
-        for target in re.findall(r"\[[^\]\n]*\]\(([^)\n]+)\)", content):
+        # Strip code blocks to avoid checking illustrative/example links
+        stripped_content = re.sub(r"```[\s\S]*?```", "", content)
+        for target in re.findall(r"\[[^\]\n]*\]\(([^)\n]+)\)", stripped_content):
             target = target.strip().strip("<>")
             if target.startswith("#") or re.match(r"[A-Za-z][A-Za-z0-9+.-]*:", target):
                 continue

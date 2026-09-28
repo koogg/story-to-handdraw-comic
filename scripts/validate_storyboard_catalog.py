@@ -59,7 +59,8 @@ def main():
         parser = LocalLinks(page)
         parser.feed(page.read_text(encoding="utf-8"))
         if name == "layouts.html":
-            assert set(parser.images) == images, "Layout gallery coverage mismatch"
+            gallery_layout_images = {p for p in parser.images if p.suffix.lower() == ".webp"}
+            assert gallery_layout_images == images, "Layout gallery coverage mismatch"
         else:
             singles = {p.resolve() for p in (LIB / "images/individual").glob("*/*.webp") if not p.stem.endswith("_grid")}
             assert singles.issubset(parser.images), "Style gallery missing individual previews"

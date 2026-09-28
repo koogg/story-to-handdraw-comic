@@ -2,9 +2,9 @@
   <strong>中文</strong> | <a href="COLORS_en.md">English</a>
 </p>
 
-# 经典单色主题色完整图鉴（30 种）
+# 经典单色主题色完整图鉴（36 种）
 
-> 这里收录了本库精选的 **30 种经典单色主题色**（涵盖经典蓝调、清新绿意、古典红绿、浪漫粉紫、暖阳大地）。在 AI 生图时直接指定色彩编号（如 `C-01`、`C-10`、`C-15`）或色彩名称（如“克莱因蓝”、“鼠尾草绿”），即可精确控制画面的主色调与情绪氛围。
+> 这里收录了本库精选的 **36 种经典单色主题色**（涵盖经典蓝系、清新绿系、古典红绿、浪漫粉紫、暖阳大地、中性色系）。在 AI 生图时直接指定色彩编号（如 `C-01`、`C-10`、`C-15`、`C-31`）或色彩名称（如“克莱因蓝”、“鼠尾草绿”、“佩恩灰”），即可精确控制画面的主色调与情绪氛围。
 
 ## 目录导航
 
@@ -13,6 +13,7 @@
 - [3. 古典红绿（6 种）](#sheet-03)
 - [4. 浪漫粉紫（6 种）](#sheet-04)
 - [5. 暖阳大地（6 种）](#sheet-05)
+- [6. 中性色系（6 种）](#sheet-06)
 
 ---
 
@@ -83,5 +84,19 @@
 | :---: | :---: | :---: |
 | <img src='images/colors/C-25.webp' width='220' alt='C-25 爱马仕橙'><br>**C-25** · 爱马仕橙<br><small>优雅的热爱 成就更好的自己</small><br><details><summary>查看色彩提示词</summary><br>`主题色：爱马仕橙（Hermès Orange）。`</details> | <img src='images/colors/C-26.webp' width='220' alt='C-26 柿子橙'><br>**C-26** · 柿子橙<br><small>温暖的时光 总是带来好心情</small><br><details><summary>查看色彩提示词</summary><br>`主题色：柿子橙（Persimmon Orange）。`</details> | <img src='images/colors/C-27.webp' width='220' alt='C-27 那不勒斯黄'><br>**C-27** · 那不勒斯黄<br><small>柔和的光线 让平凡的日子也变得美好</small><br><details><summary>查看色彩提示词</summary><br>`主题色：那不勒斯黄（Naples Yellow）。`</details> |
 | <img src='images/colors/C-28.webp' width='220' alt='C-28 芥末黄'><br>**C-28** · 芥末黄<br><small>复古的格调 让生活更有质感</small><br><details><summary>查看色彩提示词</summary><br>`主题色：芥末黄（Mustard Yellow）。`</details> | <img src='images/colors/C-29.webp' width='220' alt='C-29 赭石'><br>**C-29** · 赭石<br><small>大地的沉静 孕育永恒的美</small><br><details><summary>查看色彩提示词</summary><br>`主题色：赭石（Ochre）。`</details> | <img src='images/colors/C-30.webp' width='220' alt='C-30 象牙白'><br>**C-30** · 象牙白<br><small>纯粹而柔软 让心回归宁静</small><br><details><summary>查看色彩提示词</summary><br>`主题色：象牙白（Ivory）。`</details> |
+
+---
+
+<a id="sheet-06"></a>
+## 6. 中性色系（6 种）
+
+克制沉静、现代高级的黑白灰与中性色调，适合极简生活、建筑空间、沉思书房与质朴日常题材。
+
+![经典单色主题色库 06](images/colors/sheet_06.webp)
+
+| 效果预览 | 效果预览 | 效果预览 |
+| :---: | :---: | :---: |
+| <img src='images/colors/C-31.webp' width='220' alt='C-31 佩恩灰'><br>**C-31** · 佩恩灰<br><small>冷静而深邃 沉淀思绪</small><br><details><summary>查看色彩提示词</summary><br>`主题色：佩恩灰（Payne's Grey）。`</details> | <img src='images/colors/C-32.webp' width='220' alt='C-32 炭黑'><br>**C-32** · 炭黑<br><small>克制而有力 现代而坚定</small><br><details><summary>查看色彩提示词</summary><br>`主题色：炭黑（Charcoal Black）。`</details> | <img src='images/colors/C-33.webp' width='220' alt='C-33 暖灰'><br>**C-33** · 暖灰<br><small>温和而耐看 让生活松弛下来</small><br><details><summary>查看色彩提示词</summary><br>`主题色：暖灰（Warm Grey）。`</details> |
+| <img src='images/colors/C-34.webp' width='220' alt='C-34 奶油白'><br>**C-34** · 奶油白<br><small>轻柔而纯净 留下呼吸感</small><br><details><summary>查看色彩提示词</summary><br>`主题色：奶油白（Cream White）。`</details> | <img src='images/colors/C-35.webp' width='220' alt='C-35 石板灰'><br>**C-35** · 石板灰<br><small>理性而利落 充满建筑感</small><br><details><summary>查看色彩提示词</summary><br>`主题色：石板灰（Slate Gray）。`</details> | <img src='images/colors/C-36.webp' width='220' alt='C-36 米驼色'><br>**C-36** · 米驼色<br><small>自然而高级 温柔又克制</small><br><details><summary>查看色彩提示词</summary><br>`主题色：米驼色（Taupe）。`</details> |
 
 ---
