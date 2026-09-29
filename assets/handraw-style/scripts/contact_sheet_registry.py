@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Maintain the active 4×4 H-category imported-style contact sheet."""
+"""Maintain the active 4×4 H-category Tweet-style contact sheet."""
 from __future__ import annotations
 
 import json

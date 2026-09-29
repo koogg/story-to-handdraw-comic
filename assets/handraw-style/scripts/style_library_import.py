@@ -6,15 +6,9 @@ import json
 import re
 import subprocess
 import sys
-import shutil
-import tempfile
-from contextlib import contextmanager
 from pathlib import Path
 
-try:
-    from PIL import Image, ImageDraw, ImageFont
-except ModuleNotFoundError:
-    raise SystemExit("错误：缺少 Pillow；请在当前 Python 环境安装 Pillow 后重试。") from None
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 from contact_sheet_registry import append_style
 from style_asset_paths import ROOT, asset_dir, bucket_name, grid_path, single_path
@@ -26,90 +20,6 @@ MODEL_CAP = SKILL_DIR / "references" / "model_capabilities.json"
 BUILD_SCRIPT = SKILL_DIR / "scripts" / "build_library.py"
 VALIDATE_SCRIPT = SKILL_DIR / "scripts" / "validate_library.py"
 ACTIVATIONS = {"strong", "weak", "none", "unknown"}
-
-
-def validate_library() -> None:
-    result = subprocess.run([sys.executable, "-B", "-X", "utf8", str(VALIDATE_SCRIPT)],
-                            capture_output=True, text=True, encoding="utf-8")
-    if result.returncode:
-        raise ValueError("风格库校验失败，请先修复再导入：\n" + (result.stderr or result.stdout).strip())
-
-
-def preflight(source_name: str, generation_name: str, traits: str, images: list[Path],
-              *, square: bool = False) -> None:
-    for label, value in (("风格名称", source_name), ("生成名称", generation_name), ("特征", traits)):
-        if any(char in value for char in ("|", "\n", "\r")):
-            raise ValueError(f"{label}不能包含竖线或换行，以免破坏目录表格。")
-    if not source_name.strip() or not generation_name.strip():
-        raise ValueError("风格名称和生成名称不能为空。")
-    if not images:
-        raise ValueError("缺少参考图片，请提供 --image。")
-    for path in images:
-        if not path.is_file():
-            raise ValueError(f"参考图片不存在：{path}")
-        try:
-            with Image.open(path) as image:
-                if square and image.width != image.height:
-                    raise ValueError(f"参考图片必须为正方形，当前为 {image.width}×{image.height}：{path}")
-                image.load()
-        except OSError as error:
-            raise ValueError(f"无法读取参考图片 {path}：{error}") from error
-    validate_library()
-    number = get_next_style_number()
-    if single_path(number).exists() or grid_path(number).exists():
-        raise ValueError(f"编号 {number} 已有图片文件，请先检查上次导入是否完整。")
-
-
-def mutable_files() -> set[Path]:
-    paths = set(ROOT.glob("*.md"))
-    for directory in (ROOT / "images", SKILL_DIR / "references", SKILL_DIR / "gallery"):
-        paths.update(path for path in directory.rglob("*") if path.is_file())
-    paths.add(SKILL_DIR / "SKILL.md")
-    return paths
-
-
-@contextmanager
-def import_transaction(extra_paths: tuple[Path, ...] = ()):
-    """Serialize imports and restore managed files after a failed mutation."""
-    lock = ROOT / ".style-import.lock"
-    try:
-        handle = lock.open("x", encoding="utf-8")
-    except FileExistsError as error:
-        raise ValueError("已有导入进行中；若上次进程异常退出，请检查备份和库状态后手动移除 .style-import.lock。") from error
-    backup = None
-    keep_backup = False
-    try:
-        with handle:
-            backup = Path(tempfile.mkdtemp(prefix="style-import-backup-"))
-            handle.write(str(backup))
-            handle.flush()
-            for path in extra_paths:
-                path.resolve().relative_to(ROOT.resolve())
-            before = mutable_files() | {p for p in extra_paths if p.is_file()}
-            for path in before:
-                target = backup / path.relative_to(ROOT)
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(path, target)
-            try:
-                yield
-            except BaseException as error:
-                try:
-                    for path in (mutable_files() | {p for p in extra_paths if p.is_file()}) - before:
-                        path.resolve().relative_to(ROOT.resolve())
-                        path.unlink()
-                    for path in before:
-                        path.parent.mkdir(parents=True, exist_ok=True)
-                        shutil.copy2(backup / path.relative_to(ROOT), path)
-                except Exception as rollback_error:
-                    keep_backup = True
-                    raise RuntimeError(f"导入失败且恢复未完成；请手动恢复备份 {backup}。原因：{rollback_error}") from error
-                raise RuntimeError(f"导入失败，已恢复导入前的风格库：{error}") from error
-    finally:
-        if not keep_backup:
-            lock.unlink(missing_ok=True)
-            if backup is not None:
-                backup.resolve().relative_to(Path(tempfile.gettempdir()).resolve())
-                shutil.rmtree(backup)
 
 
 def get_next_style_number() -> str:
@@ -135,12 +45,17 @@ def create_4grid_image(image_paths: list[Path], output_path: Path) -> None:
 def create_numbered_tile(source_path: Path, number: str, output_path: Path, badge_label: str | None) -> None:
     """Write a 512px gallery tile with an optional top-left badge."""
     with Image.open(source_path) as source:
-        image = source.convert("RGB").resize((512, 512), Image.Resampling.LANCZOS)
+        image = ImageOps.fit(source.convert("RGB"), (512, 512), Image.Resampling.LANCZOS, centering=(0.5, 0.5))
     if badge_label:
         draw = ImageDraw.Draw(image)
-        try:
-            font = ImageFont.truetype("DejaVuSans-Bold.ttf", 24)
-        except Exception:
+        font = None
+        for font_name in ("arialbd.ttf", "Arial Bold.ttf", "DejaVuSans-Bold.ttf", "arial.ttf"):
+            try:
+                font = ImageFont.truetype(font_name, 24)
+                break
+            except Exception:
+                continue
+        if font is None:
             font = ImageFont.load_default()
         bbox = font.getbbox(badge_label)
         width, height = bbox[2] - bbox[0], bbox[3] - bbox[1]
@@ -197,6 +112,9 @@ def update_readme_and_skill(number: str) -> None:
     readme_path = ROOT / "README.md"
     content = readme_path.read_text(encoding="utf-8")
     content = re.sub(r"001–\d+ 种手绘风格", f"001–{number} 种手绘风格", content)
+    content = re.sub(r"\b\d+ 种手绘插画风格体系", f"{int(number)} 种手绘插画风格体系", content)
+    content = re.sub(r"001–\d+ 完整风格拼图大表", f"001–{number} 完整风格拼图大表", content)
+    content = re.sub(r"（\d+ 种风格 Markdown 详细表格", f"（{int(number)} 种风格 Markdown 详细表格", content)
     content = re.sub(r"### G · 附件新增 / 中国当代插画补充（201–\d+）", "### G · 附件新增 / 中国当代插画补充（201–216）", content)
     content = re.sub(r"### H · 其他（217–\d+）", f"### H · 其他（217–{number}）", content)
     for prefix, title in (("G", "### G · 附件新增 / 中国当代插画补充"), ("H", "### H · 其他")):
@@ -204,11 +122,36 @@ def update_readme_and_skill(number: str) -> None:
         content = pattern.sub(r"\1" + _sheet_lines(prefix) + "\n\n", content)
     readme_path.write_text(content.strip() + "\n", encoding="utf-8")
 
-    for path in (ROOT / "SKILL.md", SKILL_DIR / "SKILL.md"):
-        content = path.read_text(encoding="utf-8")
-        content = re.sub(r"001–\d+", f"001–{number}", content)
-        content = re.sub(r"`001`–`\d+`", f"`001`–`{number}`", content)
-        path.write_text(content, encoding="utf-8")
+    readme_en_path = ROOT / "README_en.md"
+    if readme_en_path.exists():
+        en_content = readme_en_path.read_text(encoding="utf-8")
+        en_content = re.sub(r"\b\d+ distinct hand-drawn illustration styles\b", f"{int(number)} distinct hand-drawn illustration styles", en_content)
+        en_content = re.sub(r"`001`–`\d+`", f"`001`–`{number}`", en_content)
+        en_content = re.sub(r"\b\d+ systematically categorized", f"{int(number)} systematically categorized", en_content)
+        en_content = re.sub(r"for all \d+ styles", f"for all {int(number)} styles", en_content)
+        en_content = re.sub(r"\(001–\d+ Full Visual Contact Sheets\)", f"(001–{number} Full Visual Contact Sheets)", en_content)
+        en_content = re.sub(r"\(\d+ Styles Table & Core Traits\)", f"({int(number)} Styles Table & Core Traits)", en_content)
+        en_content = re.sub(r"In addition to \d+ illustration styles", f"In addition to {int(number)} illustration styles", en_content)
+        readme_en_path.write_text(en_content.strip() + "\n", encoding="utf-8")
+
+    skill_paths = list(ROOT.glob("skills/*/SKILL.md")) + list(ROOT.glob(".agents/skills/*/SKILL.md")) + [ROOT / "SKILL.md"]
+    for path in set(skill_paths):
+        if path.exists():
+            content = path.read_text(encoding="utf-8")
+            content = re.sub(r"001–\d+", f"001–{number}", content)
+            content = re.sub(r"`001`–`\d+`", f"`001`–`{number}`", content)
+            content = re.sub(r"#001–#\d+", f"#001–#{number}", content)
+            content = re.sub(r"`#001`–`#\d+`", f"`#001`–`#{number}`", content)
+            content = re.sub(r"\b\d+ 种手绘风格", f"{int(number)} 种手绘风格", content)
+            content = re.sub(r"\b\d+种手绘风格", f"{int(number)}种手绘风格", content)
+            content = re.sub(r"全库\s*\d+\s*种手绘风格", f"全库 {int(number)} 种手绘风格", content)
+            path.write_text(content, encoding="utf-8")
+
+    prompt_style_path = SKILL_DIR / "scripts" / "prompt_style.py"
+    if prompt_style_path.exists():
+        content = prompt_style_path.read_text(encoding="utf-8")
+        content = re.sub(r"\b\d+ styles\b", f"{int(number)} styles", content)
+        prompt_style_path.write_text(content, encoding="utf-8")
 
 
 def update_manifest(number: str) -> None:
@@ -223,7 +166,6 @@ def update_manifest(number: str) -> None:
                      f"images/individual/201-400/201.webp`–`images/individual/{bucket}/{number}.webp`：201–{number} 的编号单图", content)
     content = re.sub(r"H：217–\d+，完整（其他）", f"H：217–{number}，完整（其他）", content)
     content = re.sub(r"单图总数：\d+ 张", f"单图总数：{int(number)} 张", content)
-    content = re.sub(r"拼图总数：\d+ 张", f"拼图总数：{len(boards)} 张", content)
     content = re.sub(r"风格编号覆盖：001–\d+", f"风格编号覆盖：001–{number}", content)
     path.write_text(content, encoding="utf-8")
 

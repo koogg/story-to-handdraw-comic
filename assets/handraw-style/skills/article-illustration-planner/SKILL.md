@@ -1,6 +1,6 @@
 ---
 name: article-illustration-planner
-description: 深度分析文章脉络，精准规划插图点位与视觉意象，生成协同 279 种手绘风格与 36 种色彩画廊的高质量生图提示词。出具方案后主动引导用户进行【方式 A · 自主生图回填】或【方式 B · 全自动生图插入】，并支持将生成的配图精准自动排版回文章 Markdown。
+description: 深度分析文章脉络，精准规划插图点位与视觉意象，生成协同 280 种手绘风格与 36 种色彩画廊的高质量生图提示词。出具方案后主动引导用户进行【方式 A · 自主生图回填】或【方式 B · 全自动生图插入】，并支持将生成的配图精准自动排版回文章 Markdown。
 ---
 
 # Article Illustration Planner (文章配图规划与插图回填)
@@ -10,7 +10,7 @@ Turn an article into a coherent visual-illustration plan and deliver the final i
 The user provides:
 
 * An article text or local file path (e.g. `d:\path\to\article.md`);
-* (Optional) A hand-drawn style number (`001`–`279`) and/or theme color (`C-01`–`C-36`). If omitted, the Skill automatically analyzes the article's mood, domain, and audience to recommend an optimal cohesive style and theme color combination;
+* (Optional) A hand-drawn style number (`001`–`280`) and/or theme color (`C-01`–`C-36`). If omitted, the Skill automatically analyzes the article's mood, domain, and audience to recommend an optimal cohesive style and theme color combination;
 * (Optional) Whitespace preference (`留白`: `正常` / `适中` / `多`). Default is `正常`;
 * (Optional) Aspect ratio. Default is `4:3` (editorial reading standard). Note: Poster layout selection is strictly disabled for article illustrations.
 
@@ -79,7 +79,7 @@ The normal first response is an illustration plan, generation prompts, and the d
 - Always support absolute Windows paths cleanly.
 
 ### 2. Style & Color
-- Style range: `#001`–`#279` from the local hand-drawn style library.
+- Style range: `#001`–`#280` from the local hand-drawn style library.
 - Color palette: `C-01`–`C-36` from the 36 classic theme color gallery.
 - Dynamic aesthetic reasoning: If user doesn't specify, analyze domain, mood, and tone to recommend the most expressive style and color palette.
 
@@ -245,7 +245,7 @@ The prompt structure:
 1. **图片类型 / Image type**: `图片类型：{image_type}。` / `Image type: {image_type}.`
 2. **主题与核心视觉意象**: Dominant visual idea, key subjects, environmental storytelling.
 3. **留白修饰**: If `适中`, append `【大量留白】` / `[generous whitespace]`. If `多`, append `【大量留白，场景只显示必要部分，不要显示全】` / `[generous whitespace, show only essential elements of the scene, do not display the full context]`.
-4. **画风与色彩基调**: Hand-drawn style definition from `#001`–`#279` and theme color from `C-01`–`C-36`.
+4. **画风与色彩基调**: Hand-drawn style definition from `#001`–`#280` and theme color from `C-01`–`C-36`.
 
 ---
 
@@ -345,7 +345,7 @@ When the user triggers Track B (e.g. "全自动生图", "帮我生成并插入",
    - For each planned Illustration N in sequential order:
      - Call the image generation tool (`generate_image`) using the finalized prompt.
      - Specify aspect ratio `4:3` (unless customized by user).
-     - Maintain strict style `#001`–`#279` and color consistency.
+     - Maintain strict style `#001`–`#280` and color consistency.
 3. **Asset Organization**:
    - Save each generated image to `<article_dir>/images/illus_01.webp`, `illus_02.webp`, etc.
 4. **Automatic Insertion & Assembly**:

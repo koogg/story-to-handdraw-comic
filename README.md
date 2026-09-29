@@ -13,7 +13,6 @@
 | [story-to-handdraw-comic](SKILL.md) | 将内容改编成单张图文、海报、社媒卡、信息图或漫画，并管理连载项目 | 根据请求交付方案、完整提示词文件或图片；连载模式额外保存跨章节角色、状态与参考图。 |
 | [handdraw-style-prompter](assets/handraw-style/skills/handdraw-style-prompter/SKILL.md) | 已知画风编号＋主题的双语提示词 | 默认对话中给中英提示词；只有请求出图时生图。其纯图／图文包装不覆盖主技能已改编的文案。 |
 | [article-illustration-planner](assets/handraw-style/skills/article-illustration-planner/SKILL.md) | 为文章安排插图位置、概念与提示词 | 默认保留文章，给插图规划和双语提示词；不是自动把整篇文章改成漫画。 |
-| [style-library-importer](assets/handraw-style/.agents/skills/style-library-importer/SKILL.md) | 将明确要求保存的画风加入可复用风格库 | 去重、预检、追加编号、重建与校验；普通创作及人物参考不触发导入。 |
 | [handdraw-style-library](assets/handraw-style/SKILL.md) | 浏览资源及分流到上述风格库专用技能 | 包级兼容入口，不再与 `handdraw-style-prompter` 使用同一个发现名称。原 `$handdraw-style-prompter` 仍由专用技能承接。 |
 
 ```mermaid
@@ -22,8 +21,7 @@ flowchart TD
     B -->|图文／海报／社媒卡／信息图／漫画／连载漫画| C[主技能：确定交付意图和约束]
     B -->|编号与主题| P[双语提示词技能]
     B -->|文章插图位置| Q[文章配图规划技能]
-    B -->|明确要求画风入库| M[导入：去重 → 预检 → 追加 → 重建校验]
-    C --> T{连载项目?}
+        C --> T{连载项目?}
     T -->|是| U[初始化或恢复项目与本回角色状态]
     T -->|否| D[确定画风、类型、数量及文字边界]
     U --> D
@@ -291,7 +289,7 @@ flowchart TD
 
 有来源链接及许可信息时一并提供，并保留来源记录。去重需要比较画面语言，导入脚本本身不执行语义去重。人物照片仅供角色参考时，不作为新画风入库。
 
-手动导入的参数、预检、追加编号和错误恢复见[画风导入说明](assets/handraw-style/.agents/skills/style-library-importer/SKILL.md)；已有画风的更新与移除见[风格库维护](references/style-library-maintenance.md)。
+已有画风的更新与移除见[风格库维护](references/style-library-maintenance.md)。
 
 ## 资料入口
 
@@ -303,7 +301,7 @@ flowchart TD
 - [生成与验收](references/rendering.md)：参考图、逐页检查、重试上限及未完成状态。
 - [连载漫画项目模式](references/serial-comic.md)：项目初始化、跨会话恢复、长期人物与剧情状态管理。
 - [风格库维护](references/style-library-maintenance.md)：新增风格按编号追加，避免重排已有编号。
-- [内置风格库许可证](assets/handraw-style/LICENSE) · [第三方授权](assets/handraw-style/THIRD_PARTY_NOTICES.md)
+- [内置风格库许可证](assets/handraw-style/LICENSE)
 
 ## 校验
 

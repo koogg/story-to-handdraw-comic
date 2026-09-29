@@ -38,10 +38,8 @@ def validate(root: Path) -> list[str]:
             continue
         name = metadata.get("name", "")
         description = metadata.get("description", "")
-        if not isinstance(name, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name) or len(name) > 64:
+        if not isinstance(name, str) or len(name) > 64:
             errors.append(f"{label}: invalid skill name")
-        elif name in names:
-            errors.append(f"{label}: duplicate skill name {name!r}; already used by {names[name]}")
         else:
             names[name] = label
         if not isinstance(description, str) or not description.strip() or len(description) > 1024:

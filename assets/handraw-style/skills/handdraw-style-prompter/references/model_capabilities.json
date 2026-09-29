@@ -500,6 +500,10 @@
         "279": {
           "name_activation": "weak",
           "traits_activation": "strong"
+        },
+        "280": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
         }
       }
     }

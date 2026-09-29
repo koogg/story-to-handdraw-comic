@@ -4,7 +4,6 @@ The bundled library is `assets/handraw-style`, relative to the parent SKILL.md. 
 
 ## Add a style
 
-Read the bundled [style-library-importer](../assets/handraw-style/.agents/skills/style-library-importer/SKILL.md) for input interpretation, duplicate checks, representative-image preparation, and the preflight/import commands. It owns the addition procedure; do not duplicate that policy here.
 
 - Run commands from the library directory; resolve supplied relative image paths from that working directory.
 - The CLI accepts one square representative image. For multiple examples, prepare one coherent square board before import. Preserve proportions and available source/license records.

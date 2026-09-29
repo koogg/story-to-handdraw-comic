@@ -97,7 +97,7 @@ def resolve(model: str, style: str, policy: dict | None = None) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", required=True)
+    parser.add_argument("--model", default="gpt-image-2", help="Target model identifier (default: gpt-image-2)")
     parser.add_argument("--style", required=True)
     args = parser.parse_args()
     print(json.dumps(resolve(args.model, args.style), ensure_ascii=False))
